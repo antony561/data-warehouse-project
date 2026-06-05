@@ -9,7 +9,7 @@ An end-to-end Data Warehouse built from scratch using SQL Server, implementing t
 
 ## Architecture
 
-![Data Architecture](docs/data_architecture.png)
+<img width="1220" height="617" alt="post1" src="https://github.com/user-attachments/assets/2f2738a5-9a5d-43df-8640-36b195197760" />
 
 The warehouse follows a three-layer Medallion Architecture:
 
@@ -35,7 +35,7 @@ Six source tables from two systems (CRM and ERP) flow through the pipeline and c
 
 ## Integration Model
 
-![Integration Model](docs/integration_model.png)
+<img width="1277" height="667" alt="post2" src="https://github.com/user-attachments/assets/1a8fbe4d-2c1f-4194-a6b2-3f8f6871fac6" />
 
 ---
 
