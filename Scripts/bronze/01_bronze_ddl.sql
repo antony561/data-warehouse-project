@@ -1,3 +1,27 @@
+/*
+=============================================================
+Script:  01_bronze_ddl.sql
+Author:  Antony Alvin Johnson
+=============================================================
+Purpose:
+    Creates all raw landing tables in the Bronze schema.
+    These tables mirror the source structure exactly —
+    no transformations are applied at this stage.
+
+    Tables created:
+        bronze.crm_cust_info      - Customer information (CRM)
+        bronze.crm_prd_info       - Product information (CRM)
+        bronze.crm_sales_details  - Sales transactions (CRM)
+        bronze.erp_loc_a101       - Customer locations (ERP)
+        bronze.erp_cust_az12      - Customer demographics (ERP)
+        bronze.erp_px_cat_g1v2    - Product categories (ERP)
+
+Note:
+    Each table is dropped and recreated on every run.
+    This supports full-load ETL — no incremental logic.
+=============================================================
+*/
+
 IF OBJECT_ID ('bronze.crm_cust_info', 'U') IS NOT NULL
     DROP TABLE bronze.crm_cust_info;
 CREATE TABLE bronze.crm_cust_info(
