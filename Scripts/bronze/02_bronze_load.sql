@@ -1,20 +1,30 @@
 /*
-===============================================================================
-Stored Procedure: Load Bronze Layer (Source -> Bronze)
-===============================================================================
-Script Purpose:
-    This stored procedure loads data into the 'bronze' schema from external CSV files. 
-    It performs the following actions:
-    - Truncates the bronze tables before loading data.
-    - Uses the `BULK INSERT` command to load data from csv Files to bronze tables.
+=============================================================
+Script:  02_bronze_load.sql
+Author:  Antony Alvin Johnson
+=============================================================
+Purpose:
+    Stored procedure that loads raw data from CSV source files
+    into the Bronze schema using BULK INSERT.
 
-Parameters:
-    None. 
-	  This stored procedure does not accept any parameters or return any values.
+    Each table is truncated before loading (full load pattern).
+    Load duration is tracked per table and for the full batch.
 
-Usage Example:
+    Tables loaded:
+        bronze.crm_cust_info      - Customer information (CRM)
+        bronze.crm_prd_info       - Product information (CRM)
+        bronze.crm_sales_details  - Sales transactions (CRM)
+        bronze.erp_loc_a101       - Customer locations (ERP)
+        bronze.erp_cust_az12      - Customer demographics (ERP)
+        bronze.erp_px_cat_g1v2    - Product categories (ERP)
+
+Note:
+    BULK INSERT paths are set to local machine paths.
+    Update the file paths to match your environment before running.
+
+Usage:
     EXEC bronze.load_bronze;
-===============================================================================
+=============================================================
 */
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS
 BEGIN
@@ -131,10 +141,9 @@ BEGIN
 	END TRY
 	BEGIN CATCH
 		PRINT '=========================================='
-		PRINT 'ERROR OCCURED DURING LOADING BRONZE LAYER'
-		PRINT 'Error Message' + ERROR_MESSAGE();
-		PRINT 'Error Message' + CAST (ERROR_NUMBER() AS NVARCHAR);
-		PRINT 'Error Message' + CAST (ERROR_STATE() AS NVARCHAR);
+		PRINT 'Error Message: ' + ERROR_MESSAGE();
+        PRINT 'Error Number:  ' + CAST(ERROR_NUMBER() AS NVARCHAR);
+        PRINT 'Error State:   ' + CAST(ERROR_STATE() AS NVARCHAR);
 		PRINT '=========================================='
 	END CATCH
 END
