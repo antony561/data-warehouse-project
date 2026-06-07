@@ -1,16 +1,21 @@
 /*
 =============================================================
-Create Database and Schemas
+Script:  00_init_database.sql
+Author:  Antony Alvin Johnson
 =============================================================
-Script Purpose:
-    This script creates a new database named 'DataWarehouse' after checking if it already exists. 
-    If the database exists, it is dropped and recreated. Additionally, the script sets up three schemas 
-    within the database: 'bronze', 'silver', and 'gold'.
-	
-WARNING:
-    Running this script will drop the entire 'DataWarehouse' database if it exists. 
-    All data in the database will be permanently deleted. Proceed with caution 
-    and ensure you have proper backups before running this script.
+Purpose:
+    Initialises the DataWarehouse database and creates three
+    schemas to support the Medallion Architecture:
+
+        Bronze  - Raw data landing zone (source data as-is)
+        Silver  - Cleaned and standardised data
+        Gold    - Business-ready star schema for analytics
+
+Warning:
+    This script will DROP and recreate the DataWarehouse
+    database if it already exists. All existing data will
+    be permanently lost. Run only during initial setup.
+=============================================================
 */
 
 USE master;
